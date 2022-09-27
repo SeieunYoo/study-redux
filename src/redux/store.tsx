@@ -4,6 +4,8 @@ const COUNT = 'count';
 const SET_NAME = 'set_name';
 const ADD_NUM = 'add_num';
 
+
+//액션 type 지정
 export const dispatchCount = (num: number) => {
   return {
     type: COUNT,
@@ -25,6 +27,7 @@ export const dispatchAddNum = (num: number) => {
   };
 };
 
+//초기 state type 지정
 export interface IState {
   name: string;
   num: number;
@@ -35,6 +38,7 @@ const InitialState: IState = {
   num: 0,
 };
 
+//리듀서 작성
 function reducer(state: IState = InitialState, action: any) {
   switch (action.type) {
     case COUNT:
