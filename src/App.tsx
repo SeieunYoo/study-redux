@@ -4,6 +4,8 @@ import { dispatchCount, dispatchName } from './redux/store';
 import { IState } from './redux/store';
 import AddButton from './components/AddButton';
 import styled from 'styled-components';
+import PlayConfetti from './components/PlayConfetti';
+import Confetti from 'react-confetti';
 
 function App() {
   const [data, setData] = useState({
@@ -33,9 +35,16 @@ function App() {
   }
 
   const currentState = useSelector((state: IState) => state);
+
   return (
     <Container>
       <h1>Count-Num</h1>
+      {currentState.num % 7 === 0 && currentState.num !== 0 && (
+        <>
+          <Confetti gravity={0.4} />
+          <h1>🍀🍀🍀🍀행운의 숫자 당첨🍀🍀🍀🍀</h1>
+        </>
+      )}
       {currentState.num !== 0 ? (
         <h2>
           {currentState.name}님의 숫자는 {currentState.num}
