@@ -1,6 +1,8 @@
+import { stat } from 'fs';
 import { useState } from 'react';
-import { useDispatch , useSelector } from 'react-redux';
-import { dispatchCount, dispatchName } from './redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { dispatchCount, dispatchName, dispatchAddNum } from './redux/store';
+
 function App() {
   const [data, setData] = useState({
     name: '',
@@ -16,6 +18,7 @@ function App() {
 
   const dispatch = useDispatch();
 
+  
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setData({
       ...data,
@@ -33,18 +36,23 @@ function App() {
     }
   }
 
-  const currentState : IState = useSelector((state : IState)=>state);
+  function handleAddNum(number: number) {
+    dispatch(dispatchAddNum(number));
+  }
 
+  const currentState = useSelector((state : IState)=>state);
   return (
     <>
       <form onSubmit={onSubmit}>
-        <input value={name} name="name" onChange={onChange} />
-        <input value={num} name="num" onChange={onChange} />
+        <input value={name} name="name" type="text" onChange={onChange} />
+        <input value={num} name="num" type="number" onChange={onChange} />
         <button>저장</button>
       </form>
       <div>{currentState.name}</div>
       <div>{currentState.num}</div>
-      <button>+8</button>
+      <button onClick={() => handleAddNum(8)}>+8</button>
+      <button onClick={() => handleAddNum(6)}>+6</button>
+      <button onClick={() => handleAddNum(4)}>+4</button>
     </>
   );
 }

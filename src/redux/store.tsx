@@ -18,12 +18,12 @@ export const dispatchName = (name: string) => {
   };
 };
 
-export const dispatchAddNum = (name: string) => {
-    return {
-      type: ADD_NUM,
-      name,
-    };
+export const dispatchAddNum = (num: number) => {
+  return {
+    type: ADD_NUM,
+    num,
   };
+};
 
 interface IState {
   name: string;
@@ -47,6 +47,11 @@ function reducer(state: IState = InitialState, action: any) {
       return {
         ...state,
         name: action.name,
+      };
+    case ADD_NUM:
+      return {
+        ...state,
+        num: parseInt(String(state.num)) + action.num,
       };
     default:
       return state;
