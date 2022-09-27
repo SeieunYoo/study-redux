@@ -1,7 +1,8 @@
-import { stat } from 'fs';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dispatchCount, dispatchName, dispatchAddNum } from './redux/store';
+import { IState } from './redux/store';
+import AddButton from './components/AddButton';
 
 function App() {
   const [data, setData] = useState({
@@ -9,16 +10,10 @@ function App() {
     num: 0,
   });
 
-  interface IState {
-    name: string;
-    num: number;
-  }
-
   const { name, num } = data;
 
   const dispatch = useDispatch();
 
-  
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setData({
       ...data,
@@ -36,11 +31,7 @@ function App() {
     }
   }
 
-  function handleAddNum(number: number) {
-    dispatch(dispatchAddNum(number));
-  }
-
-  const currentState = useSelector((state : IState)=>state);
+  const currentState = useSelector((state: IState) => state);
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -48,11 +39,12 @@ function App() {
         <input value={num} name="num" type="number" onChange={onChange} />
         <button>저장</button>
       </form>
-      <div>{currentState.name}</div>
-      <div>{currentState.num}</div>
-      <button onClick={() => handleAddNum(8)}>+8</button>
-      <button onClick={() => handleAddNum(6)}>+6</button>
-      <button onClick={() => handleAddNum(4)}>+4</button>
+      {currentState.num !== 0 && (
+        <div>
+          {currentState.name}님의 숫자는 {currentState.num}
+        </div>
+      )}
+      <AddButton />
     </>
   );
 }

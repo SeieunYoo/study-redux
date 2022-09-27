@@ -25,7 +25,7 @@ export const dispatchAddNum = (num: number) => {
   };
 };
 
-interface IState {
+export interface IState {
   name: string;
   num: number;
 }
