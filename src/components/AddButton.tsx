@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { dispatchAddNum } from '../redux/store';
 import { useState } from 'react';
+import styled from 'styled-components';
+
 function AddButton() {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
@@ -12,12 +14,16 @@ function AddButton() {
 
   return (
     <>
-      {selected !== 0 && <div>+{selected}을 선택했습니다</div>}
-      <button onClick={() => handleAddNum(8)}>+8</button>
-      <button onClick={() => handleAddNum(6)}>+6</button>
-      <button onClick={() => handleAddNum(4)}>+4</button>
+      {selected !== 0 && <h2>+{selected}을 선택했습니다</h2>}
+      <StyledButton onClick={() => handleAddNum(8)}>+8</StyledButton>
+      <StyledButton onClick={() => handleAddNum(6)}>+6</StyledButton>
+      <StyledButton onClick={() => handleAddNum(4)}>+4</StyledButton>
     </>
   );
 }
 
 export default AddButton;
+
+const StyledButton = styled.button`
+  margin: 10px;
+`;
