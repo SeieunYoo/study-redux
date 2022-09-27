@@ -4,7 +4,6 @@ import { dispatchCount, dispatchName } from './redux/store';
 import { IState } from './redux/store';
 import AddButton from './components/AddButton';
 import styled from 'styled-components';
-import PlayConfetti from './components/PlayConfetti';
 import Confetti from 'react-confetti';
 
 function App() {
